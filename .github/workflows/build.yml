@@ -44,4 +44,4 @@ jobs:
         with:
           name: build
       - shell: bash
-        run: ls public/*
+        run: ls -Al
