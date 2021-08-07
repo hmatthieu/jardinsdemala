@@ -35,7 +35,7 @@ jobs:
           path: public
           retention-days: 5
 
-  publish:
+  deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -43,5 +43,15 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build
-      - shell: bash
-        run: ls -Al
+          path: public
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H jardinsdemala.fr >> ~/.ssh/known_hosts
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy
+        run: rsync -avz ./public deploy@jardinsdemala.fr:/home/tech/jardinsdemala.fr/html
