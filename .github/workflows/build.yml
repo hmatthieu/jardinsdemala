@@ -45,11 +45,12 @@ jobs:
           name: build
           path: public
 
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.0
         with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-
-      - name: Deploy
-        run: rsync -avz ./public deploy@jardinsdemala.fr:/home/tech/jardinsdemala.fr/html
+          switches: -avzr --delete
+          path: public/
+          remote_path: /home/tech/jardinsdemala.fr/html
+          remote_host: jardinsdemala.fr
+          remote_user: deploy
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
