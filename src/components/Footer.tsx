@@ -59,6 +59,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   max-width: ${MAX_WIDTH_CONTENT}px;
+  margin: auto;
   font-size: 20px;
   color: white;
   display: flex;
