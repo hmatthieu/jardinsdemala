@@ -7,11 +7,14 @@ import { Banner } from "../components/Banner";
 import { StrapiColor, StrapiToColors } from "../constant/Colors";
 import styled from "styled-components";
 import { CategoryCard } from "../components/CategoryCard";
+import { SubCategoryItem } from "../components/SubCategoryItem";
+import { SocialBanner } from "../components/SocialBanner";
+import { Footer } from "../components/Footer";
 
-const CategoryList = styled.div`
+const HorizontalList = styled.div`
   display: flex;
   justify-content: center;
-  margin: 24px 0;
+  margin: 48px 0;
 `;
 
 interface SEO {
@@ -27,6 +30,18 @@ interface SEO {
     };
   };
   Titre: string;
+}
+
+interface SubCategory {
+  id: string;
+  Titre: string;
+  Image: {
+    formats: {
+      thumbnail: {
+        url: string;
+      };
+    };
+  };
 }
 
 interface Category {
@@ -54,6 +69,7 @@ interface Props {
         };
       };
       categories: Category[];
+      SousCategories: SubCategory[];
     };
   };
 }
@@ -111,7 +127,7 @@ const Landing = ({ data }: Props) => (
       imageURL={fromAPI(data.strapiAccueil.Bandeau.Image.url)}
       caption={data.strapiAccueil.Bandeau.Citation}
     />
-    <CategoryList>
+    <HorizontalList>
       {data.strapiAccueil.categories.map(category => (
         <CategoryCard
           key={category.id}
@@ -121,7 +137,18 @@ const Landing = ({ data }: Props) => (
           description={category.Description}
         />
       ))}
-    </CategoryList>
+    </HorizontalList>
+    <HorizontalList>
+      {data.strapiAccueil.SousCategories.map(subCategory => (
+        <SubCategoryItem
+          key={subCategory.id}
+          title={subCategory.Titre}
+          imageURL={fromAPI(subCategory.Image.formats.thumbnail.url)}
+        />
+      ))}
+    </HorizontalList>
+    <SocialBanner />
+    <Footer />
   </>
 );
 
@@ -153,6 +180,17 @@ export const query = graphql`
         Description
         Titre
         id
+        Image {
+          formats {
+            thumbnail {
+              url
+            }
+          }
+        }
+      }
+      SousCategories {
+        id
+        Titre
         Image {
           formats {
             thumbnail {

@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { Link as GatsbyLink } from "gatsby";
+import { MAX_WIDTH_CONTENT } from "../constant/Sizes";
 
 export const Container = styled.header`
   width: 100%;
-  max-width: 1400px;
+  max-width: ${MAX_WIDTH_CONTENT}px;
   margin: auto;
   padding: 0 42px;
   height: 200px;
@@ -44,6 +45,8 @@ export const Link = styled(GatsbyLink)`
 `;
 
 export const Logo = styled.img`
+  min-height: 180px;
   height: 180px;
+  min-width: 180px;
   width: 180px;
 `;
