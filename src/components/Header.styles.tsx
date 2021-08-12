@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link as GatsbyLink } from "gatsby";
 import { MAX_WIDTH_CONTENT } from "../constant/Sizes";
+import { PURPLE } from "../constant/Colors";
 
 export const Container = styled.header`
   width: 100%;
@@ -33,13 +34,13 @@ export const Link = styled(GatsbyLink)`
     height: 3px;
     border-radius: 5px;
     transition: all 300ms ease;
-    background-color: black;
+    background-color: ${PURPLE};
     opacity: 0;
   }
 
   &.active::after,
   &:hover::after {
-    width: 90%;
+    width: 100%;
     opacity: 1;
   }
 `;

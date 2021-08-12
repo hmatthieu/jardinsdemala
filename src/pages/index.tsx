@@ -51,7 +51,7 @@ interface Category {
   Titre: string;
   Image: {
     formats: {
-      thumbnail: {
+      medium: {
         url: string;
       };
     };
@@ -66,6 +66,18 @@ interface Props {
         Citation: string;
         Image: {
           url: string;
+        };
+        ActionPrincipale: {
+          Accroche: string;
+          Lien: string;
+          Image: {
+            formats: {
+              thumbnail: {
+                url: string;
+              };
+            };
+            alternativeText: string;
+          };
         };
       };
       categories: Category[];
@@ -126,6 +138,16 @@ const Landing = ({ data }: Props) => (
     <Banner
       imageURL={fromAPI(data.strapiAccueil.Bandeau.Image.url)}
       caption={data.strapiAccueil.Bandeau.Citation}
+      cta={{
+        text: data.strapiAccueil.Bandeau.ActionPrincipale.Accroche,
+        imageURL: fromAPI(
+          data.strapiAccueil.Bandeau.ActionPrincipale.Image.formats.thumbnail
+            .url
+        ),
+        imageAlt:
+          data.strapiAccueil.Bandeau.ActionPrincipale.Image.alternativeText,
+        link: data.strapiAccueil.Bandeau.ActionPrincipale.Lien,
+      }}
     />
     <HorizontalList>
       {data.strapiAccueil.categories.map(category => (
@@ -133,7 +155,7 @@ const Landing = ({ data }: Props) => (
           key={category.id}
           title={category.Titre}
           color={StrapiToColors[category.Couleur]}
-          imageURL={fromAPI(category.Image.formats.thumbnail.url)}
+          imageURL={fromAPI(category.Image.formats.medium.url)}
           description={category.Description}
         />
       ))}
@@ -174,6 +196,18 @@ export const query = graphql`
         Image {
           url
         }
+        ActionPrincipale {
+          Accroche
+          Lien
+          Image {
+            formats {
+              thumbnail {
+                url
+              }
+            }
+            alternativeText
+          }
+        }
       }
       categories {
         Couleur
@@ -182,7 +216,7 @@ export const query = graphql`
         id
         Image {
           formats {
-            thumbnail {
+            medium {
               url
             }
           }

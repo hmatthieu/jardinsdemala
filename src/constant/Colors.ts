@@ -7,9 +7,9 @@ export enum StrapiColor {
 }
 
 export const ORANGE = "#F87028";
-export const PURPLE = "#930E82";
-export const BLUE = "#19A3A7";
-export const GREEN_LIGHT = "#7fC76F";
+export const PURPLE = "#a20086";
+export const BLUE = "#00a6a9";
+export const GREEN_LIGHT = "#65c864";
 export const GREEN_DARK = "#169250";
 
 export const StrapiToColors: Record<StrapiColor, string> = {

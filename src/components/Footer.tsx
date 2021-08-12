@@ -7,10 +7,11 @@ import { fromAPI } from "../technical/fromAPI";
 
 interface Image {
   formats: {
-    medium: {
+    large: {
       url: string;
     };
   };
+  alternativeText: string;
 }
 
 interface Lien {
@@ -49,7 +50,7 @@ interface FooterData {
 }
 
 const FooterContainer = styled.footer`
-  margin-top: 48px;
+  margin-top: -146px;
 `;
 
 const Container = styled.div`
@@ -64,6 +65,10 @@ const Content = styled.div`
   color: white;
   display: flex;
   justify-content: space-between;
+
+  > div:last-child {
+    text-align: right;
+  }
 `;
 
 const MenuContainer = styled.div`
@@ -74,16 +79,20 @@ const MenuContainer = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     margin: 0 24px;
+
+    :first-child {
+      margin-left: 0;
+    }
   }
 `;
 
 const Link = styled(GatsbyLink)``;
 
 const Illustration = styled.img`
-  min-height: 300px;
+  min-height: 370px;
   position: relative;
-  height: 300px;
-  top: 50px;
+  height: 370px;
+  top: 85px;
   object-fit: contain;
   margin: auto;
 `;
@@ -101,10 +110,11 @@ export const Footer = () => {
         }
         Illustration {
           formats {
-            medium {
+            large {
               url
             }
           }
+          alternativeText
         }
         Menu {
           Liens {
@@ -133,8 +143,8 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <Illustration
-        src={fromAPI(data.strapiPiedDePage.Illustration.formats.medium.url)}
-        alt=""
+        src={fromAPI(data.strapiPiedDePage.Illustration.formats.large.url)}
+        alt={data.strapiPiedDePage.Illustration.alternativeText}
       />
       <Container>
         <Content>
