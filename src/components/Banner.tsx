@@ -125,6 +125,7 @@ export const Banner = ({ imageURL, lowImageURL, caption, cta }: Props) => {
           src={imageURL}
           loading="lazy"
           onLoad={handleImageLoaded}
+          alt=""
         />
         {cta && (
           <CTA visible={visible} href={cta.link}>

@@ -56,6 +56,8 @@ export const Header = () => {
           <Logo
             src={fromAPI(data.strapiEntete.Logo.formats.small.url)}
             alt="Jardins de Mala"
+            height={180}
+            width={180}
           />
         </GatsbyLink>
         <div>

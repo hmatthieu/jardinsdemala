@@ -136,6 +136,7 @@ export const SocialBanner = () => {
             {
               method: "POST",
               body: new FormData(form),
+              mode: "no-cors",
             }
           );
           setEmailSent(true);
@@ -191,7 +192,7 @@ export const SocialBanner = () => {
           <Text>Suivre les Jardins de Mala</Text>
           <SocialButtons>
             {data.strapiReseauxSociaux.Social.map(({ id, Lien, Reseau }) => (
-              <a key={id} href={Lien} target="_blank">
+              <a rel="noreferrer" key={id} href={Lien} target="_blank">
                 <img src={NetworkImage[Reseau]} alt={Reseau} />
               </a>
             ))}

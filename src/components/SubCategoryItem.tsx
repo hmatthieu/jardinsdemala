@@ -25,6 +25,7 @@ const Image = styled.img`
   width: 120px;
   min-width: 120px;
   margin: auto;
+  object-fit: contain;
 `;
 
 interface Props {
@@ -34,7 +35,7 @@ interface Props {
 
 export const SubCategoryItem = ({ title, imageURL }: Props) => (
   <Container>
-    <Image src={imageURL} alt={title} />
+    <Image src={imageURL} alt={title} height={120} width={120} />
     <Title>{title}</Title>
   </Container>
 );

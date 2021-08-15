@@ -169,7 +169,7 @@ const Landing = ({ data }: Props) => (
     </HorizontalList>
     <HorizontalList>
       {data.strapiAccueil.SousCategories.map(subCategory => (
-        <a href="#">
+        <a rel="noreferrer" href="#">
           <SubCategoryItem
             key={subCategory.id}
             title={subCategory.Titre}

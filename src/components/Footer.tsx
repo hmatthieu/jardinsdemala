@@ -131,17 +131,20 @@ const Illustration = styled.img<{ lowSrc?: string }>`
   min-height: 370px;
   position: relative;
   height: 370px;
+  width: 1300px
   top: 85px;
 
   @media (max-width: ${LAPTOP}px) {
     min-height: 250px;
     height: 250px;
+    width: 1097px;
     top: 58px;
   }
 
   @media (max-width: ${TABLET}px) {
     min-height: 140px;
     height: 140px;
+    width: 514px;
     top: 32px;
   }
 
@@ -209,6 +212,8 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <Illustration
+        width={1300}
+        height={370}
         lowSrc={
           imageLoaded
             ? undefined
