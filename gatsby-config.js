@@ -29,7 +29,13 @@ module.exports = {
         apiURL: process.env.STRAPI_URL,
         queryLimit: 1000, // Defaults to 100
         collectionTypes: ["articles", "categories", "sous-categories"],
-        singleTypes: ["accueil", "entete", "identite", "pied-de-page"],
+        singleTypes: [
+          "accueil",
+          "entete",
+          "identite",
+          "pied-de-page",
+          "reseaux-sociaux",
+        ],
       },
     },
     `gatsby-transformer-sharp`,

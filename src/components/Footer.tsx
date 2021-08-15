@@ -55,7 +55,7 @@ const FooterContainer = styled.footer`
 
 const Container = styled.div`
   background-color: ${GREEN_LIGHT};
-  padding: 48px 96px;
+  padding: 42px;
 `;
 
 const Content = styled.div`

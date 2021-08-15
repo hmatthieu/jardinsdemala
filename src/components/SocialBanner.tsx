@@ -2,9 +2,39 @@ import * as React from "react";
 import styled from "styled-components";
 import { PURPLE } from "../constant/Colors";
 import { Button } from "./Button";
+import "../custom-types/assets.d";
+import instagram from "../assets/images/instagram.svg";
+import facebook from "../assets/images/facebook.svg";
+import mail from "../assets/images/mail.svg";
+import { graphql, useStaticQuery } from "gatsby";
+
+enum Network {
+  FACEBOOK = "Facebook",
+  INSTAGRAM = "Instagram",
+  EMAIL = "Email",
+}
+
+const NetworkImage: Record<Network, string> = {
+  [Network.INSTAGRAM]: instagram,
+  [Network.FACEBOOK]: facebook,
+  [Network.EMAIL]: mail,
+};
+
+interface Social {
+  id: string;
+  Lien: string;
+  Reseau: Network;
+}
+
+interface SocialData {
+  strapiReseauxSociaux: {
+    Social: Social[];
+  };
+}
 
 const Container = styled.div`
   background-color: ${PURPLE};
+  padding: 0 42px;
 `;
 
 const Content = styled.div`
@@ -58,12 +88,33 @@ const Text = styled.p`
 
 const SocialButtons = styled.div`
   display: flex;
+  color: white;
   > *:not(:last-child) {
     margin-right: 12px;
+  }
+  img {
+    height: 60px;
+    width: 60px;
+    transition: all 0.3s ease;
+    :hover {
+      transform: scale(1.1);
+    }
   }
 `;
 
 export const SocialBanner = () => {
+  const data = useStaticQuery<SocialData>(graphql`
+    query SocialBannerQuery {
+      strapiReseauxSociaux {
+        Social {
+          Lien
+          Reseau
+          id
+        }
+      }
+    }
+  `);
+
   return (
     <Container>
       <Content>
@@ -76,9 +127,11 @@ export const SocialBanner = () => {
         <Item>
           <Text>Suivre les Jardins de Mala</Text>
           <SocialButtons>
-            <div style={{ height: 60, width: 60, background: "white" }} />
-            <div style={{ height: 60, width: 60, background: "white" }} />
-            <div style={{ height: 60, width: 60, background: "white" }} />
+            {data.strapiReseauxSociaux.Social.map(({ id, Lien, Reseau }) => (
+              <a key={id} href={Lien} target="_blank">
+                <img src={NetworkImage[Reseau]} alt={Reseau} />
+              </a>
+            ))}
           </SocialButtons>
         </Item>
       </Content>

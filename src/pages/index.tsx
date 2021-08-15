@@ -65,7 +65,14 @@ interface Props {
       Bandeau: {
         Citation: string;
         Image: {
-          url: string;
+          formats: {
+            large: {
+              url: string;
+            };
+            small: {
+              url: string;
+            };
+          };
         };
         ActionPrincipale: {
           Accroche: string;
@@ -136,7 +143,8 @@ const Landing = ({ data }: Props) => (
     />
     <Header />
     <Banner
-      imageURL={fromAPI(data.strapiAccueil.Bandeau.Image.url)}
+      lowImageURL={fromAPI(data.strapiAccueil.Bandeau.Image.formats.small.url)}
+      imageURL={fromAPI(data.strapiAccueil.Bandeau.Image.formats.large.url)}
       caption={data.strapiAccueil.Bandeau.Citation}
       cta={{
         text: data.strapiAccueil.Bandeau.ActionPrincipale.Accroche,
@@ -194,7 +202,14 @@ export const query = graphql`
       Bandeau {
         Citation
         Image {
-          url
+          formats {
+            large {
+              url
+            }
+            small {
+              url
+            }
+          }
         }
         ActionPrincipale {
           Accroche

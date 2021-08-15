@@ -1,18 +1,35 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { PURPLE } from "../constant/Colors";
 
 const Container = styled.div``;
 
-const BannerImage = styled.div`
+const BannerImageContainer = styled.div`
+  position: relative;
   height: 60vh;
   width: 100%;
-  background-size: cover;
-  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const BannerImage = styled.img<{ lowSrc?: string }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  ${({ lowSrc }) =>
+    lowSrc &&
+    `
+    background-image: url(${lowSrc});
+  `}
 `;
 
 const CaptionContainer = styled.div`
@@ -74,6 +91,7 @@ const CTA = styled.a<{ visible: boolean }>`
 
 interface Props {
   imageURL: string;
+  lowImageURL?: string;
   caption: string;
   cta?: {
     text: string;
@@ -83,29 +101,31 @@ interface Props {
   };
 }
 
-export const Banner = ({ imageURL, caption, cta }: Props) => {
+export const Banner = ({ imageURL, lowImageURL, caption, cta }: Props) => {
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
+  const handleImageLoaded = useCallback(() => {
+    setTimeout(() => {
       setVisible(true);
     }, 1000);
-
-    return () => {
-      clearTimeout(timeout);
-    };
   }, [setVisible]);
 
   return (
     <Container>
-      <BannerImage style={{ backgroundImage: `url(${imageURL})` }}>
+      <BannerImageContainer>
+        <BannerImage
+          lowSrc={lowImageURL}
+          src={imageURL}
+          loading="lazy"
+          onLoad={handleImageLoaded}
+        />
         {cta && (
           <CTA visible={visible} href={cta.link}>
             <img src={cta.imageURL} alt={cta.imageAlt} />
             <h1>Je réserve ma chambre</h1>
           </CTA>
         )}
-      </BannerImage>
+      </BannerImageContainer>
       <CaptionContainer>
         <Caption>{caption}</Caption>
       </CaptionContainer>
