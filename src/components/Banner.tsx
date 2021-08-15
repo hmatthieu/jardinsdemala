@@ -2,6 +2,7 @@ import * as React from "react";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { PURPLE } from "../constant/Colors";
+import { TABLET } from "../constant/Breakpoints";
 
 const Container = styled.div``;
 
@@ -25,6 +26,7 @@ const BannerImage = styled.img<{ lowSrc?: string }>`
   object-fit: cover;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   ${({ lowSrc }) =>
     lowSrc &&
     `
@@ -38,12 +40,14 @@ const CaptionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px;
 `;
 
 const Caption = styled.q`
   font-size: 36px;
   font-weight: 700;
   color: white;
+  text-align: center;
   ::after,
   ::before {
     content: "";
@@ -56,7 +60,6 @@ const CTA = styled.a<{ visible: boolean }>`
   justify-content: center;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.9);
-  min-width: 650px;
   padding: 24px 48px;
   color: ${PURPLE};
   text-transform: uppercase;
@@ -64,17 +67,21 @@ const CTA = styled.a<{ visible: boolean }>`
   font-weight: 700;
   transition: opacity 1s ease, transform 1s ease, background 0.3s ease;
 
+  @media (min-width: ${TABLET}px) {
+    min-width: 650px;
+  }
+
   ${({ visible }) =>
-      visible
-        ? `
+    visible
+      ? `
     opacity: 1;
     transform: translateY(0);
   `
-        : `
+      : `
     opacity: 0;
     transform: translateY(-20%);
   `}
-    :hover {
+  :hover {
     background-color: white;
     box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
   }

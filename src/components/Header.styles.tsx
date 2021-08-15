@@ -16,6 +16,7 @@ export const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  text-align: right;
 `;
 
 export const Link = styled(GatsbyLink)`

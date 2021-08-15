@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { GREEN_LIGHT } from "../constant/Colors";
 import { MAX_WIDTH_CONTENT } from "../constant/Sizes";
 import { fromAPI } from "../technical/fromAPI";
+import { LAPTOP, TABLET } from "../constant/Breakpoints";
 
 interface Image {
   formats: {
@@ -53,11 +54,19 @@ interface FooterData {
 
 const FooterContainer = styled.footer`
   margin-top: -146px;
+
+  @media (max-width: ${LAPTOP}px) {
+    margin-top: -120px;
+  }
+
+  @media (max-width: ${TABLET}px) {
+    margin-top: -62px;
+  }
 `;
 
 const Container = styled.div`
   background-color: ${GREEN_LIGHT};
-  padding: 42px;
+  padding: 56px 42px;
 `;
 
 const Content = styled.div`
@@ -70,6 +79,17 @@ const Content = styled.div`
 
   > div:last-child {
     text-align: right;
+  }
+
+  @media (max-width: ${TABLET}px) {
+    flex-direction: column-reverse;
+
+    > div:last-child {
+      justify-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
   }
 `;
 
@@ -86,19 +106,50 @@ const MenuContainer = styled.div`
       margin-left: 0;
     }
   }
+
+  @media (max-width: ${TABLET}px) {
+    justify-content: space-between;
+    > nav {
+      margin: 0;
+    }
+  }
 `;
 
-const Link = styled(GatsbyLink)``;
+const OptionalNav = styled.nav`
+  @media (max-width: ${TABLET}px) {
+    display: none !important;
+  }
+`;
+
+const Link = styled(GatsbyLink)`
+  :hover {
+    text-decoration: underline;
+  }
+`;
 
 const Illustration = styled.img<{ lowSrc?: string }>`
   min-height: 370px;
   position: relative;
   height: 370px;
   top: 85px;
+
+  @media (max-width: ${LAPTOP}px) {
+    min-height: 250px;
+    height: 250px;
+    top: 58px;
+  }
+
+  @media (max-width: ${TABLET}px) {
+    min-height: 140px;
+    height: 140px;
+    top: 32px;
+  }
+
   object-fit: contain;
   margin: auto;
   background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
   ${({ lowSrc }) =>
     lowSrc &&
     `
@@ -178,13 +229,13 @@ export const Footer = () => {
                 </Link>
               ))}
             </nav>
-            <nav>
+            <OptionalNav>
               {data.strapiPiedDePage.Categories.map(({ id, Titre, Slug }) => (
                 <Link id={id} to={`/${Slug}`}>
                   {Titre}
                 </Link>
               ))}
-            </nav>
+            </OptionalNav>
             <nav>
               {data.strapiPiedDePage.Legal.Liens.map(({ id, Texte, Lien }) => (
                 <Link id={id} to={Lien}>

@@ -40,7 +40,8 @@ const BaseButton = styled.button<ButtonBaseProps>`
   font-size: 20px;
   line-height: 18px;
   text-align: center;
-  padding: 14px 24px;
+  padding: 0 24px;
+  height: 58px;
   min-width: 190px;
   transition: all 0.3s ease;
 
@@ -70,13 +71,6 @@ const TextContainer = styled.div`
   position: relative;
 `;
 
-const LoadingContainer = styled.div`
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translate(-100%, -50%);
-`;
-
 export interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color">,
     ButtonBaseProps {
@@ -85,9 +79,6 @@ export interface ButtonProps
 
 export const Button = ({ loading, children, ...props }: ButtonProps) => (
   <BaseButton disabled={loading} {...props}>
-    <TextContainer>
-      <LoadingContainer>{loading && <Loading />}</LoadingContainer>
-      {children}
-    </TextContainer>
+    <TextContainer>{loading ? <Loading /> : children}</TextContainer>
   </BaseButton>
 );

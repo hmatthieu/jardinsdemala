@@ -4,6 +4,11 @@ import { PURPLE } from "../constant/Colors";
 
 const Container = styled.div`
   margin: 24px;
+  color: ${PURPLE};
+
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 const Title = styled.h2`
@@ -12,7 +17,6 @@ const Title = styled.h2`
   font-weight: 700;
   font-size: 28px;
   margin: 14px;
-  color: ${PURPLE};
 `;
 
 const Image = styled.img`

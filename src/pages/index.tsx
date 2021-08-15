@@ -13,6 +13,7 @@ import { Footer } from "../components/Footer";
 
 const HorizontalList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin: 48px 0;
 `;
@@ -170,11 +171,13 @@ const Landing = ({ data }: Props) => (
     </HorizontalList>
     <HorizontalList>
       {data.strapiAccueil.SousCategories.map(subCategory => (
-        <SubCategoryItem
-          key={subCategory.id}
-          title={subCategory.Titre}
-          imageURL={fromAPI(subCategory.Image.formats.thumbnail.url)}
-        />
+        <a href="#">
+          <SubCategoryItem
+            key={subCategory.id}
+            title={subCategory.Titre}
+            imageURL={fromAPI(subCategory.Image.formats.thumbnail.url)}
+          />
+        </a>
       ))}
     </HorizontalList>
     <SocialBanner />
