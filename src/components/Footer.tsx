@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useCallback, useState } from "react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 import { GREEN_LIGHT } from "../constant/Colors";
@@ -7,10 +8,11 @@ import { fromAPI } from "../technical/fromAPI";
 
 interface Image {
   formats: {
-    large: {
+    small: {
       url: string;
     };
   };
+  url: string;
   alternativeText: string;
 }
 
@@ -88,13 +90,20 @@ const MenuContainer = styled.div`
 
 const Link = styled(GatsbyLink)``;
 
-const Illustration = styled.img`
+const Illustration = styled.img<{ lowSrc?: string }>`
   min-height: 370px;
   position: relative;
   height: 370px;
   top: 85px;
   object-fit: contain;
   margin: auto;
+  background-size: contain;
+  background-position: center;
+  ${({ lowSrc }) =>
+    lowSrc &&
+    `
+    background-image: url(${lowSrc});
+  `}
 `;
 
 export const Footer = () => {
@@ -109,8 +118,9 @@ export const Footer = () => {
           }
         }
         Illustration {
+          url
           formats {
-            large {
+            small {
               url
             }
           }
@@ -139,12 +149,24 @@ export const Footer = () => {
       }
     }
   `);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true);
+  }, [setImageLoaded]);
 
   return (
     <FooterContainer>
       <Illustration
-        src={fromAPI(data.strapiPiedDePage.Illustration.formats.large.url)}
+        lowSrc={
+          imageLoaded
+            ? undefined
+            : fromAPI(data.strapiPiedDePage.Illustration.formats.small.url)
+        }
+        src={fromAPI(data.strapiPiedDePage.Illustration.url)}
         alt={data.strapiPiedDePage.Illustration.alternativeText}
+        loading="lazy"
+        onLoad={handleImageLoad}
       />
       <Container>
         <Content>
