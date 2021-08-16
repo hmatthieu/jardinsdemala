@@ -60,7 +60,7 @@ const FooterContainer = styled.footer`
   }
 
   @media (max-width: ${TABLET}px) {
-    margin-top: -62px;
+    margin-top: -87px;
   }
 `;
 
@@ -131,8 +131,11 @@ const Illustration = styled.img<{ lowSrc?: string }>`
   min-height: 370px;
   position: relative;
   height: 370px;
-  width: 1300px
+  width: 1300px;
   top: 85px;
+  object-fit: contain;
+  background-size: contain;
+  margin: auto;
 
   @media (max-width: ${LAPTOP}px) {
     min-height: 250px;
@@ -142,15 +145,14 @@ const Illustration = styled.img<{ lowSrc?: string }>`
   }
 
   @media (max-width: ${TABLET}px) {
-    min-height: 140px;
-    height: 140px;
-    width: 514px;
-    top: 32px;
+    min-height: 350px;
+    height: 350px;
+    width: 100%;
+    top: 38px;
+    object-fit: cover;
+    background-size: cover;
+    margin: 0;
   }
-
-  object-fit: contain;
-  margin: auto;
-  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   ${({ lowSrc }) =>

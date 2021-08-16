@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link as GatsbyLink } from "gatsby";
 import { MAX_WIDTH_CONTENT } from "../constant/Sizes";
 import { PURPLE } from "../constant/Colors";
+import { TABLET } from "../constant/Breakpoints";
 
 export const Container = styled.header`
   width: 100%;
@@ -51,4 +52,12 @@ export const Logo = styled.img`
   height: 180px;
   min-width: 180px;
   width: 180px;
+`;
+
+export const Menu = styled.div`
+  display: flex;
+
+  @media (max-width: ${TABLET}px) {
+    flex-direction: column;
+  }
 `;

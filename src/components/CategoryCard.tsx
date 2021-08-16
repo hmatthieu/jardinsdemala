@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { TABLET } from "../constant/Breakpoints";
 
 interface Colored {
   color: string;
@@ -22,6 +23,12 @@ const Card = styled.div<Colored & { background: string }>`
   position: relative;
   height: 280px;
   width: 280px;
+
+  @media (max-width: ${TABLET}px) {
+    height: 200px;
+    width: 200px;
+  }
+
   background-color: ${({ color }) => color};
   display: flex;
   align-items: center;
@@ -57,6 +64,10 @@ const Card = styled.div<Colored & { background: string }>`
     opacity: 0;
     text-align: center;
     transition: 0.3s ease all;
+
+    @media (max-width: ${TABLET}px) {
+      font-size: 22px;
+    }
   }
 
   &:hover > p {
