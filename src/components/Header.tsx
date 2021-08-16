@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
-import { Container, Content, Link, Logo } from "./Header.styles";
+import { Container, Content, Link, Logo, Menu } from "./Header.styles";
 import { fromAPI } from "../technical/fromAPI";
 
 interface Image {
@@ -60,13 +60,13 @@ export const Header = () => {
             width={180}
           />
         </GatsbyLink>
-        <div>
+        <Menu>
           {data.strapiEntete.Menu.Liens.map(({ id, Texte, Lien }) => (
             <Link key={id} to={Lien}>
               {Texte}
             </Link>
           ))}
-        </div>
+        </Menu>
       </Content>
     </Container>
   );
