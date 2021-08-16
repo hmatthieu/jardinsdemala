@@ -53,14 +53,14 @@ interface FooterData {
 }
 
 const FooterContainer = styled.footer`
-  margin-top: -146px;
+  margin-top: -135px;
 
   @media (max-width: ${LAPTOP}px) {
-    margin-top: -120px;
+    margin-top: -100px;
   }
 
   @media (max-width: ${TABLET}px) {
-    margin-top: -87px;
+    margin-top: -95px;
   }
 `;
 
@@ -136,6 +136,7 @@ const Illustration = styled.img<{ lowSrc?: string }>`
   object-fit: contain;
   background-size: contain;
   margin: auto;
+  pointer-events: none;
 
   @media (max-width: ${LAPTOP}px) {
     min-height: 250px;
@@ -145,10 +146,10 @@ const Illustration = styled.img<{ lowSrc?: string }>`
   }
 
   @media (max-width: ${TABLET}px) {
-    min-height: 350px;
-    height: 350px;
+    min-height: 217px;
+    height: 217px;
     width: 100%;
-    top: 38px;
+    top: 50px;
     object-fit: cover;
     background-size: cover;
     margin: 0;

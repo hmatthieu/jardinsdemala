@@ -62,9 +62,9 @@ export const Header = () => {
         </GatsbyLink>
         <Menu>
           {data.strapiEntete.Menu.Liens.map(({ id, Texte, Lien }) => (
-            <Link key={id} to={Lien}>
-              {Texte}
-            </Link>
+            <div key={id}>
+              <Link to={Lien}>{Texte}</Link>
+            </div>
           ))}
         </Menu>
       </Content>
