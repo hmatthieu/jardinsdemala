@@ -1,11 +1,13 @@
 import { navigate } from "gatsby";
 import { SyntheticEvent } from "react";
 
+const host = "jardinsdemala.fr";
+
 export function processHref(href: string | undefined) {
-  const hostPosition = href ? href.search(window.document.location.host) : -1;
+  const hostPosition = href ? href.search(host) : -1;
 
   if (hostPosition >= 0 && hostPosition < 10) {
-    return href.slice(hostPosition + window.document.location.host.length);
+    return href.slice(hostPosition + host.length);
   }
   return href;
 }
