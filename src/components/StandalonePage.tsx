@@ -84,7 +84,7 @@ export default ({ pageContext: { page } }: Props) => (
         },
         {
           property: "og:url",
-          content: `https://${window.document.location.host}${page.path}`,
+          content: `https://jardinsdemala.fr${page.path}`,
         },
         { property: "og:type", content: "website" },
         { property: "og:title", content: page.seo.title || page.title },
