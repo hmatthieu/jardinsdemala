@@ -1,11 +1,12 @@
 import * as React from "react";
 import { useCallback, useState } from "react";
-import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 import { GREEN_LIGHT } from "../constant/Colors";
 import { MAX_WIDTH_CONTENT } from "../constant/Sizes";
 import { fromAPI } from "../technical/fromAPI";
 import { LAPTOP, TABLET } from "../constant/Breakpoints";
+import { AnyLink as BaseAnyLink } from "./AnyLink";
 
 interface Image {
   formats: {
@@ -121,7 +122,7 @@ const OptionalNav = styled.nav`
   }
 `;
 
-const Link = styled(GatsbyLink)`
+const AnyLink = styled(BaseAnyLink)`
   :hover {
     text-decoration: underline;
   }
@@ -232,23 +233,23 @@ export const Footer = () => {
           <MenuContainer>
             <nav>
               {data.strapiPiedDePage.Menu.Liens.map(({ id, Texte, Lien }) => (
-                <Link id={id} style={{ fontWeight: 700 }} to={Lien}>
+                <AnyLink key={id} style={{ fontWeight: 700 }} href={Lien}>
                   {Texte}
-                </Link>
+                </AnyLink>
               ))}
             </nav>
             <OptionalNav>
               {data.strapiPiedDePage.Categories.map(({ id, Titre, Slug }) => (
-                <Link id={id} to={`/${Slug}`}>
+                <AnyLink key={id} href={`/${Slug}`}>
                   {Titre}
-                </Link>
+                </AnyLink>
               ))}
             </OptionalNav>
             <nav>
               {data.strapiPiedDePage.Legal.Liens.map(({ id, Texte, Lien }) => (
-                <Link id={id} to={Lien}>
+                <AnyLink key={id} href={Lien}>
                   {Texte}
-                </Link>
+                </AnyLink>
               ))}
             </nav>
           </MenuContainer>

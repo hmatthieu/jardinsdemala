@@ -28,7 +28,7 @@ module.exports = {
       options: {
         apiURL: process.env.STRAPI_URL,
         queryLimit: 1000, // Defaults to 100
-        collectionTypes: ["articles", "categories", "sous-categories"],
+        collectionTypes: ["articles", "categories", "sous-categories", "pages"],
         singleTypes: [
           "accueil",
           "entete",

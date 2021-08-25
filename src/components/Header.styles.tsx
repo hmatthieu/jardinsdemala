@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link as GatsbyLink } from "gatsby";
+import { AnyLink } from "./AnyLink";
 import { MAX_WIDTH_CONTENT } from "../constant/Sizes";
 import { PURPLE } from "../constant/Colors";
 import { TABLET } from "../constant/Breakpoints";
@@ -20,7 +20,7 @@ export const Content = styled.div`
   text-align: right;
 `;
 
-export const Link = styled(GatsbyLink)`
+export const Link = styled(AnyLink)`
   position: relative;
   margin: 0 24px;
   font-size: 20px;

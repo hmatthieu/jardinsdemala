@@ -10,6 +10,7 @@ import { CategoryCard } from "../components/CategoryCard";
 import { SubCategoryItem } from "../components/SubCategoryItem";
 import { SocialBanner } from "../components/SocialBanner";
 import { Footer } from "../components/Footer";
+import { AnyLink } from "../components/AnyLink";
 
 const HorizontalList = styled.div`
   display: flex;
@@ -169,13 +170,12 @@ const Landing = ({ data }: Props) => (
     </HorizontalList>
     <HorizontalList>
       {data.strapiAccueil.SousCategories.map(subCategory => (
-        <a rel="noreferrer" href="#">
+        <AnyLink key={subCategory.id} href={subCategory.Titre}>
           <SubCategoryItem
-            key={subCategory.id}
             title={subCategory.Titre}
             imageURL={fromAPI(subCategory.Image.formats.thumbnail.url)}
           />
-        </a>
+        </AnyLink>
       ))}
     </HorizontalList>
     <SocialBanner />
