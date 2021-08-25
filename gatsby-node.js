@@ -63,7 +63,7 @@ exports.createPages = ({ graphql, actions }) => {
         : {
             description: result.data.strapiAccueil.SEO.Description,
             favicon: result.data.strapiAccueil.SEO.Favicon.url,
-            image: result.data.strapiAccueil.SEO.Image.formats.medium.url,
+            image: result.data.strapiAccueil.SEO.Image.formats.medium?.url,
           },
     }));
 
