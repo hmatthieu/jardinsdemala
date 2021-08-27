@@ -2,10 +2,11 @@ const path = require(`path`);
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  const projectTemplate = path.resolve(`src/components/StandalonePage.tsx`);
+  const standaloneTemplate = path.resolve(`src/components/StandalonePage.tsx`);
+  const articleTemplate = path.resolve(`src/components/ArticlePage.tsx`);
 
   return graphql(`
-    query Pages {
+    query AllPages {
       allStrapiPages {
         nodes {
           Contenu
@@ -16,7 +17,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
             Image {
               formats {
-                medium {
+                thumbnail {
                   url
                 }
               }
@@ -25,6 +26,31 @@ exports.createPages = ({ graphql, actions }) => {
           }
           Slug
           Titre
+        }
+      }
+      allStrapiArticles {
+        nodes {
+          Titre
+          Description
+          Image {
+            formats {
+              thumbnail {
+                url
+              }
+            }
+          }
+          Contenu
+          Slug
+          Date
+          categorie {
+            Titre
+            Slug
+          }
+          decouvrir {
+            id
+            Titre
+            Slug
+          }
         }
       }
       strapiAccueil {
@@ -58,20 +84,49 @@ exports.createPages = ({ graphql, actions }) => {
             title: node.SEO.Titre,
             description: node.SEO.Description,
             favicon: node.SEO.Favicon.url,
-            image: node.SEO.Image.formats.medium.url,
+            image: node.SEO.Image.formats.thumbnail.url,
           }
         : {
             description: result.data.strapiAccueil.SEO.Description,
             favicon: result.data.strapiAccueil.SEO.Favicon.url,
-            image: result.data.strapiAccueil.SEO.Image.formats.medium?.url,
+            image: result.data.strapiAccueil.SEO.Image.formats.thumbnail.url,
           },
     }));
 
     pages.forEach(page => {
       createPage({
         path: page.path,
-        component: projectTemplate,
+        component: standaloneTemplate,
         context: { page },
+      });
+    });
+
+    const articles = result.data.allStrapiArticles.nodes.map(node => ({
+      title: node.Titre,
+      description: node.Description,
+      image: node.Image.formats.thumbnail.url,
+      content: node.Contenu,
+      path: `/article/${node.Slug}`,
+      date: new Date(node.Date),
+      category: {
+        title: node.categorie.Titre,
+        path: `/categorie/s/${node.categorie.Slug}`,
+      },
+      discover: node.decouvrir.map(a => ({
+        id: a.id,
+        title: a.Titre,
+        path: `/article/${a.Slug}`,
+      })),
+    }));
+
+    articles.forEach(article => {
+      createPage({
+        path: article.path,
+        component: articleTemplate,
+        context: {
+          article,
+          favicon: result.data.strapiAccueil.SEO.Favicon.url,
+        },
       });
     });
   });

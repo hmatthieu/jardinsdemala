@@ -8,6 +8,7 @@ import { MAX_WIDTH_CONTENT } from "../constant/Sizes";
 import { handleCMSClick } from "../technical/handleCMSClick";
 import { NUNITO } from "../constant/Fonts";
 import Helmet from "react-helmet";
+import { LAPTOP, TABLET } from "../constant/Breakpoints";
 
 export const Title = styled.h1`
   font-size: 46px;
@@ -21,9 +22,32 @@ export const Content = styled.div`
   padding: 0 42px;
 `;
 
+export const OffsetContentLeft = styled.div`
+  margin-left: 256px;
+
+  @media (max-width: ${LAPTOP}px) {
+    margin-left: 128px;
+  }
+
+  @media (max-width: ${TABLET}px) {
+    margin-left: 0;
+  }
+`;
+
+export const OffsetContentBoth = styled.div`
+  margin: 0 256px;
+
+  @media (max-width: ${LAPTOP}px) {
+    margin: 0 128px;
+  }
+
+  @media (max-width: ${TABLET}px) {
+    margin: 0;
+  }
+`;
+
 const Main = styled.div`
   margin-top: 42px;
-  margin-bottom: 96px;
 `;
 
 export const Page = ({ children }: PropsWithChildren<{}>) => (
