@@ -31,18 +31,9 @@ const CategoryList = styled.div`
 `;
 
 interface SEO {
-  Description: string;
   Favicon: {
     url: string;
   };
-  Image: {
-    formats: {
-      medium: {
-        url: string;
-      };
-    };
-  };
-  Titre: string;
 }
 
 interface SubCategory {

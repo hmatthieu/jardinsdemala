@@ -45,6 +45,7 @@ exports.createPages = ({ graphql, actions }) => {
           categorie {
             Titre
             Slug
+            categorie
           }
           decouvrir {
             id
@@ -109,6 +110,7 @@ exports.createPages = ({ graphql, actions }) => {
       path: `/article/${node.Slug}`,
       date: new Date(node.Date),
       category: {
+        strapiId: node.categorie.categorie,
         title: node.categorie.Titre,
         path: `/categorie/s/${node.categorie.Slug}`,
       },
@@ -126,13 +128,9 @@ exports.createPages = ({ graphql, actions }) => {
         context: {
           article,
           favicon: result.data.strapiAccueil.SEO.Favicon.url,
+          categoryStrapiId: article.category.strapiId,
         },
       });
     });
   });
 };
-
-/*
-
-
- */

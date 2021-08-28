@@ -1,7 +1,7 @@
 import * as React from "react";
 import Helmet from "react-helmet";
 import { Header } from "../components/Header";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { fromAPI } from "../technical/fromAPI";
 import { Banner } from "../components/Banner";
 import { StrapiColor, StrapiToColors } from "../constant/Colors";
@@ -37,6 +37,7 @@ interface SEO {
 interface SubCategory {
   id: string;
   Titre: string;
+  Slug: string;
   Image: {
     formats: {
       thumbnail: {
@@ -48,6 +49,7 @@ interface SubCategory {
 
 interface Category {
   id: string;
+  Slug: string;
   Couleur: StrapiColor;
   Description: string;
   Titre: string;
@@ -159,18 +161,19 @@ const Landing = ({ data }: Props) => (
     />
     <HorizontalList>
       {data.strapiAccueil.categories.map(category => (
-        <CategoryCard
-          key={category.id}
-          title={category.Titre}
-          color={StrapiToColors[category.Couleur]}
-          imageURL={fromAPI(category.Image.formats.medium.url)}
-          description={category.Description}
-        />
+        <Link key={category.id} to={`/categorie/${category.Slug}`}>
+          <CategoryCard
+            title={category.Titre}
+            color={StrapiToColors[category.Couleur]}
+            imageURL={fromAPI(category.Image.formats.medium.url)}
+            description={category.Description}
+          />
+        </Link>
       ))}
     </HorizontalList>
     <HorizontalList>
       {data.strapiAccueil.SousCategories.map(subCategory => (
-        <AnyLink key={subCategory.id} href={subCategory.Titre}>
+        <AnyLink key={subCategory.id} href={`/categorie/s/${subCategory.Slug}`}>
           <SubCategoryItem
             title={subCategory.Titre}
             imageURL={fromAPI(subCategory.Image.formats.thumbnail.url)}
@@ -227,6 +230,7 @@ export const query = graphql`
         Couleur
         Description
         Titre
+        Slug
         id
         Image {
           formats {
@@ -239,6 +243,7 @@ export const query = graphql`
       SousCategories {
         id
         Titre
+        Slug
         Image {
           formats {
             thumbnail {

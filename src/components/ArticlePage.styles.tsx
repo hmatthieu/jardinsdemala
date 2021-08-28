@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "gatsby";
-import { ORANGE } from "../constant/Colors";
 import { TABLET } from "../constant/Breakpoints";
 
 export const TagsContainer = styled.div`
@@ -13,9 +12,7 @@ export const TagsContainer = styled.div`
   }
 `;
 
-export const TagLink = styled(Link)``;
-
-export const Tag = styled.span`
+export const Tag = styled.span<{ color: string }>`
   display: flex;
   align-items: center;
   height: 39px;
@@ -26,14 +23,8 @@ export const Tag = styled.span`
   text-transform: uppercase;
   padding: 8px 16px;
   background-color: transparent;
-  border: 2px solid ${ORANGE};
-  color: ${ORANGE};
-  transition: all 0.3s ease;
-
-  ${TagLink}:hover & {
-    background: ${ORANGE};
-    color: white;
-  }
+  border: 2px solid ${({ color }) => color};
+  color: ${({ color }) => color};
 `;
 
 export const Share = styled.a`
@@ -41,10 +32,18 @@ export const Share = styled.a`
   display: inline-block;
   height: 39px;
   width: 39px;
-  transform: scale(1);
   transition: all 0.3s ease;
+  border: 3px solid ${({ color }) => color};
+  background-color: white;
+  color: ${({ color }) => color};
+
   :hover {
-    transform: scale(1.1);
+    background-color: ${({ color }) => color};
+    color: white;
+  }
+
+  > svg {
+    margin: -1px;
   }
 `;
 
@@ -69,21 +68,21 @@ export const LinkedArticlesList = styled.div`
   width: 100%;
 `;
 
-export const LinkedArticle = styled(Link)`
+export const LinkedArticle = styled(Link)<{ color: string }>`
   font-weight: bold;
   font-size: 28px;
   text-align: center;
   text-transform: uppercase;
   padding: 8px 16px;
-  border: 2px solid ${ORANGE};
-  background: ${ORANGE};
+  border: 2px solid ${({ color }) => color};
+  background: ${({ color }) => color};
   color: white;
   transition: all 0.3s ease;
   margin: 12px;
 
   :hover {
     background-color: transparent;
-    color: ${ORANGE};
+    color: ${({ color }) => color};
   }
 
   @media (max-width: ${TABLET}px) {
@@ -91,10 +90,10 @@ export const LinkedArticle = styled(Link)`
   }
 `;
 
-export const Discover = styled.p`
+export const Discover = styled.p<{ color: string }>`
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
-  color: ${ORANGE};
-  border-bottom: 2px solid ${ORANGE};
+  color: ${({ color }) => color};
+  border-bottom: 2px solid ${({ color }) => color};
 `;
