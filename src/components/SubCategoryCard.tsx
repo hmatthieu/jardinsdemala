@@ -17,6 +17,10 @@ const Title = styled.h2<Colored>`
   font-size: 28px;
   margin: 14px;
   color: ${({ color }) => color};
+
+  @media (max-width: ${TABLET}px) {
+    font-size: 20px;
+  }
 `;
 
 const Card = styled.div<Colored & { background: string }>`
