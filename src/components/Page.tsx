@@ -14,6 +14,7 @@ export const Title = styled.h1`
   font-size: 46px;
   font-weight: bold;
   font-family: ${NUNITO};
+  text-transform: uppercase;
 `;
 
 export const Content = styled.div`
