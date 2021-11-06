@@ -18,15 +18,11 @@ interface Page {
   seo: SEO;
 }
 
-interface ContentProps {
+interface Props {
   page: Page;
 }
 
-interface Props {
-  pageContext: ContentProps;
-}
-
-export default ({ pageContext: { page } }: Props) => (
+export default ({ page }: Props) => (
   <>
     <Helmet
       title={page.title}

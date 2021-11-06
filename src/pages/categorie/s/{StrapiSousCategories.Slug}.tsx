@@ -115,8 +115,11 @@ interface Article {
   id: string;
   Image: {
     formats: {
-      small: {
-        url;
+      small?: {
+        url: string;
+      };
+      thumbnail: {
+        url: string;
       };
     };
     alternativeText: string;
@@ -164,7 +167,7 @@ export default ({
   location: { search },
 }: PageProps<Data>) => {
   const searchParams = new URLSearchParams(search);
-  const pages = chunk(
+  const pages: Article[][] = chunk(
     strapiSousCategories.articles.sort((a, b) => a.Date.localeCompare(b.Date)),
     4
   );
@@ -221,7 +224,10 @@ export default ({
                 {page.map(article => (
                   <article key={article.id}>
                     <img
-                      src={fromAPI(article.Image.formats.small.url)}
+                      src={fromAPI(
+                        article.Image.formats.small?.url ||
+                          article.Image.formats.thumbnail.url
+                      )}
                       alt={article.Image.alternativeText}
                       loading="lazy"
                     />
