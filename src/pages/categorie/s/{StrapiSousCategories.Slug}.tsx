@@ -297,6 +297,9 @@ export const query = graphql`
             small {
               url
             }
+            thumbnail {
+              url
+            }
           }
           alternativeText
         }
