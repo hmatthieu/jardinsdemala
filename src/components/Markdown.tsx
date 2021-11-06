@@ -2,6 +2,8 @@ import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import styled from "styled-components";
 import { fromAPI } from "../technical/fromAPI";
+import { PURPLE } from "../constant/Colors";
+import * as Color from "color";
 
 const BaseMarkdown = styled(ReactMarkdown)`
   > * {
@@ -33,6 +35,11 @@ const BaseMarkdown = styled(ReactMarkdown)`
     margin-top: 12px;
   }
 
+  p:not(:empty) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   h4 + p {
     margin-top: 0 !important;
   }
@@ -54,12 +61,30 @@ const BaseMarkdown = styled(ReactMarkdown)`
   }
 
   img {
-    margin: 12px 0;
+    margin: 12px auto;
+  }
+
+  blockquote {
+    p {
+      border-left: 5px solid
+        ${({ $accentColor }) =>
+          Color($accentColor)
+            .fade(0.5)
+            .toString()};
+      padding: 12px 24px;
+      font-style: italic;
+    }
   }
 `;
 
-export const Markdown = ({ children }: { children: string }) => (
-  <BaseMarkdown>
+export const Markdown = ({
+  children,
+  accentColor,
+}: {
+  children: string;
+  accentColor?: string;
+}) => (
+  <BaseMarkdown $accentColor={accentColor || PURPLE}>
     {children.replace(/\/uploads\//g, fromAPI("/uploads/"))}
   </BaseMarkdown>
 );

@@ -111,7 +111,9 @@ export default ({
             <Description>{article.description}</Description>
           </OffsetContentLeft>
           <OffsetContentBoth>
-            {article.content && <Markdown>{article.content}</Markdown>}
+            {article.content && (
+              <Markdown accentColor={color}>{article.content}</Markdown>
+            )}
           </OffsetContentBoth>
           <LinkedArticlesContainer>
             <Discover color={color}>Découvrir plus</Discover>
