@@ -122,8 +122,8 @@ interface Article {
     alternativeText: string;
   };
   PDF: {
-  url: string
-} | null,
+    url: string;
+  } | null;
   Type: "RECETTE" | "ARTICLE";
   Slug: string;
   Titre: string;
@@ -228,7 +228,14 @@ export default ({
                     <div>
                       <h2>{article.Titre}</h2>
                       <p>{article.Description}</p>
-                      <ButtonLink color={color} to={article.PDF ? fromAPI(article.PDF.url) : `/article/${article.Slug}`}>
+                      <ButtonLink
+                        color={color}
+                        to={
+                          article.PDF
+                            ? fromAPI(article.PDF.url)
+                            : `/article/${article.Slug}`
+                        }
+                      >
                         {ArticleCTAMap[article.Type]}
                       </ButtonLink>
                     </div>

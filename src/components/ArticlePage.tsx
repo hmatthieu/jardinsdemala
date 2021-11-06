@@ -36,7 +36,7 @@ interface Article {
   title: string;
   description: string;
   image: string;
-  content: string;
+  content?: string;
   path: string;
   date: Date;
   category: {
@@ -111,7 +111,7 @@ export default ({
             <Description>{article.description}</Description>
           </OffsetContentLeft>
           <OffsetContentBoth>
-            <Markdown>{article.content}</Markdown>
+            {article.content && <Markdown>{article.content}</Markdown>}
           </OffsetContentBoth>
           <LinkedArticlesContainer>
             <Discover color={color}>Découvrir plus</Discover>

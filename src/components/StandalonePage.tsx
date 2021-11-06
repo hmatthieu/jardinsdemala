@@ -13,7 +13,7 @@ export interface SEO {
 
 interface Page {
   title: string;
-  content: string;
+  content?: string;
   path: string;
   seo: SEO;
 }
@@ -62,7 +62,7 @@ export default ({ pageContext: { page } }: Props) => (
       <Content style={{ marginBottom: 96 }}>
         <OffsetContentBoth>
           <Title>{page.title}</Title>
-          <Markdown>{page.content}</Markdown>
+          {page.content && <Markdown>{page.content}</Markdown>}
         </OffsetContentBoth>
       </Content>
     </Page>
