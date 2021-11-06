@@ -121,6 +121,9 @@ interface Article {
     };
     alternativeText: string;
   };
+  PDF: {
+  url: string
+} | null,
   Type: "RECETTE" | "ARTICLE";
   Slug: string;
   Titre: string;
@@ -225,7 +228,7 @@ export default ({
                     <div>
                       <h2>{article.Titre}</h2>
                       <p>{article.Description}</p>
-                      <ButtonLink color={color} to={`/article/${article.Slug}`}>
+                      <ButtonLink color={color} to={article.PDF ? fromAPI(article.PDF.url) : `/article/${article.Slug}`}>
                         {ArticleCTAMap[article.Type]}
                       </ButtonLink>
                     </div>
@@ -264,7 +267,6 @@ export const query = graphql`
       }
     }
     strapiSousCategories(id: { eq: $id }) {
-      Type
       Titre
       Slug
       Description
@@ -285,6 +287,10 @@ export const query = graphql`
           }
           alternativeText
         }
+        PDF {
+          url
+        }
+        Type
         Slug
         Titre
         Description
