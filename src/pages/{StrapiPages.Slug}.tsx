@@ -35,6 +35,7 @@ export default ({ data: { strapiPages, strapiAccueil } }: Props) => (
   <StandalonePage
     page={{
       title: strapiPages.Titre,
+      content: strapiPages.Contenu,
       path: `/${strapiPages.Slug}`,
       seo: strapiPages.SEO
         ? {
