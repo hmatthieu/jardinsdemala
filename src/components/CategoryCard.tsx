@@ -39,10 +39,10 @@ const Card = styled.div<Colored & { background: string }>`
   &::before {
     content: " ";
     position: absolute;
-    top: 48px;
-    bottom: 48px;
-    left: 48px;
-    right: 48px;
+    top: 42px;
+    bottom: 42px;
+    left: 42px;
+    right: 42px;
     background-image: url(${({ background }) => background});
     background-position: center;
     background-repeat: no-repeat;

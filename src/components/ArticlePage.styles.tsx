@@ -70,7 +70,7 @@ export const LinkedArticlesList = styled.div`
 
 export const LinkedArticle = styled(Link)<{ color: string }>`
   font-weight: bold;
-  font-size: 28px;
+  font-size: 18px;
   text-align: center;
   text-transform: uppercase;
   padding: 8px 16px;

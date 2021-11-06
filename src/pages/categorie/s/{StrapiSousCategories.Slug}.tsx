@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, Link, PageProps } from "gatsby";
-import { ORANGE, StrapiColor, StrapiToColors } from "../../../constant/Colors";
+import { PURPLE, StrapiColor, StrapiToColors } from "../../../constant/Colors";
 import styled from "styled-components";
 import { Content, Page, Title as BaseTitle } from "../../../components/Page";
 import Helmet from "react-helmet";
@@ -121,6 +121,7 @@ interface Article {
     };
     alternativeText: string;
   };
+  Type: "RECETTE" | "ARTICLE";
   Slug: string;
   Titre: string;
   Description: string;
@@ -150,6 +151,11 @@ interface Data {
   };
 }
 
+const ArticleCTAMap: Record<Article["Type"], string> = {
+  RECETTE: "RECETTE",
+  ARTICLE: "LIRE PLUS",
+};
+
 export default ({
   data: { strapiAccueil, strapiSousCategories },
   location: { search },
@@ -164,7 +170,7 @@ export default ({
     pages.length
   );
   const color =
-    StrapiToColors[strapiSousCategories.categorie?.Couleur] || ORANGE;
+    StrapiToColors[strapiSousCategories.categorie?.Couleur] || PURPLE;
 
   return (
     <>
@@ -220,7 +226,7 @@ export default ({
                       <h2>{article.Titre}</h2>
                       <p>{article.Description}</p>
                       <ButtonLink color={color} to={`/article/${article.Slug}`}>
-                        Recette
+                        {ArticleCTAMap[article.Type]}
                       </ButtonLink>
                     </div>
                   </article>
@@ -258,6 +264,7 @@ export const query = graphql`
       }
     }
     strapiSousCategories(id: { eq: $id }) {
+      Type
       Titre
       Slug
       Description

@@ -54,8 +54,7 @@ const BaseMarkdown = styled(ReactMarkdown)`
   }
 
   img {
-    margin-top: 12px;
-    margin-bottom: 24px;
+    margin: 12px 0;
   }
 `;
 
