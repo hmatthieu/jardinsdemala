@@ -35,7 +35,7 @@ interface ArticleRef {
 interface Article {
   title: string;
   description: string;
-  image: string;
+  image?: string;
   content?: string;
   path: string;
   date: Date;

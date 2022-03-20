@@ -48,7 +48,7 @@ exports.createPages = ({ graphql, actions }) => {
     const articles = result.data.allStrapiArticles.nodes.map(node => ({
       title: node.Titre,
       description: node.Description,
-      image: node.Image.formats.thumbnail.url,
+      image: node.Image?.formats?.thumbnail?.url,
       content: node.Contenu,
       path: `/article/${node.Slug}`,
       date: new Date(node.Date),
