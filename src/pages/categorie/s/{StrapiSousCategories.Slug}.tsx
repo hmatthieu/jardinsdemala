@@ -113,7 +113,7 @@ interface SEO {
 
 interface Article {
   id: string;
-  Image: {
+  Image?: {
     formats: {
       small?: {
         url: string;
@@ -225,8 +225,8 @@ export default ({
                   <article key={article.id}>
                     <img
                       src={fromAPI(
-                        article.Image.formats.small?.url ||
-                          article.Image.formats.thumbnail.url
+                        article.Image?.formats?.small?.url ||
+                          article.Image?.formats?.thumbnail?.url
                       )}
                       alt={article.Image.alternativeText}
                       loading="lazy"
