@@ -221,7 +221,10 @@ export const Footer = () => {
         lowSrc={
           imageLoaded
             ? undefined
-            : fromAPI(data.strapiPiedDePage.Illustration.formats.small.url)
+            : fromAPI({
+                image: data.strapiPiedDePage.Illustration,
+                format: "small",
+              })
         }
         src={fromAPI(data.strapiPiedDePage.Illustration.url)}
         alt={data.strapiPiedDePage.Illustration.alternativeText}

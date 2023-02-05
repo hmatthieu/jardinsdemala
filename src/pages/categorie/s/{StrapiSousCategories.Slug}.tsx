@@ -204,7 +204,10 @@ export default ({
           },
           {
             property: "og:image",
-            content: fromAPI(strapiSousCategories.Image.formats.thumbnail.url),
+            content: fromAPI({
+              image: strapiSousCategories.Image,
+              format: "thumbnail",
+            }),
           },
           { property: "og:locale", content: "FR" },
           { property: "twitter:card", content: "summary_large_image" },
@@ -224,10 +227,10 @@ export default ({
                 {page.map(article => (
                   <article key={article.id}>
                     <img
-                      src={fromAPI(
-                        article.Image?.formats?.small?.url ||
-                          article.Image?.formats?.thumbnail?.url
-                      )}
+                      src={fromAPI({
+                        image: article.Image,
+                        format: "small",
+                      })}
                       alt={article.Image.alternativeText}
                       loading="lazy"
                     />

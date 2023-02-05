@@ -137,7 +137,10 @@ const Landing = ({ data }: Props) => (
         },
         {
           property: "og:image",
-          content: fromAPI(data.strapiAccueil.SEO.Image.formats.medium.url),
+          content: fromAPI({
+            image: data.strapiAccueil.SEO.Image,
+            format: "medium",
+          }),
         },
         { property: "og:locale", content: "FR" },
         { property: "twitter:card", content: "summary_large_image" },
@@ -145,15 +148,18 @@ const Landing = ({ data }: Props) => (
     />
     <Header />
     <Banner
-      lowImageURL={fromAPI(data.strapiAccueil.Bandeau.Image.formats.small.url)}
+      lowImageURL={fromAPI({
+        image: data.strapiAccueil.Bandeau.Image,
+        format: "small",
+      })}
       imageURL={fromAPI(data.strapiAccueil.Bandeau.Image.url)}
       caption={data.strapiAccueil.Bandeau.Citation}
       cta={{
         text: data.strapiAccueil.Bandeau.ActionPrincipale.Accroche,
-        imageURL: fromAPI(
-          data.strapiAccueil.Bandeau.ActionPrincipale.Image.formats.thumbnail
-            .url
-        ),
+        imageURL: fromAPI({
+          image: data.strapiAccueil.Bandeau.ActionPrincipale.Image,
+          format: "thumbnail",
+        }),
         imageAlt:
           data.strapiAccueil.Bandeau.ActionPrincipale.Image.alternativeText,
         link: data.strapiAccueil.Bandeau.ActionPrincipale.Lien,
@@ -165,7 +171,10 @@ const Landing = ({ data }: Props) => (
           <CategoryCard
             title={category.Titre}
             color={StrapiToColors[category.Couleur]}
-            imageURL={fromAPI(category.Image.formats.medium.url)}
+            imageURL={fromAPI({
+              image: category.Image,
+              format: "medium",
+            })}
             description={category.Description}
           />
         </Link>
@@ -176,7 +185,10 @@ const Landing = ({ data }: Props) => (
         <AnyLink key={subCategory.id} href={`/categorie/s/${subCategory.Slug}`}>
           <SubCategoryItem
             title={subCategory.Titre}
-            imageURL={fromAPI(subCategory.Image.formats.thumbnail.url)}
+            imageURL={fromAPI({
+              image: subCategory.Image,
+              format: "thumbnail",
+            })}
           />
         </AnyLink>
       ))}

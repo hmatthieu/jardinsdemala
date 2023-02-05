@@ -84,7 +84,10 @@ const Landing = ({ data }: Props) => (
         },
         {
           property: "og:image",
-          content: fromAPI(data.strapiAccueil.SEO.Image.formats.medium.url),
+          content: fromAPI({
+            image: data.strapiAccueil.SEO.Image,
+            format: "medium",
+          }),
         },
         { property: "og:locale", content: "FR" },
         { property: "twitter:card", content: "summary_large_image" },

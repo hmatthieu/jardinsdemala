@@ -101,7 +101,10 @@ export default ({ data: { strapiAccueil, strapiCategories } }: Props) => (
         },
         {
           property: "og:image",
-          content: fromAPI(strapiCategories.Image.formats.thumbnail.url),
+          content: fromAPI({
+            image: strapiCategories.Image,
+            format: "thumbnail",
+          }),
         },
         { property: "og:locale", content: "FR" },
         { property: "twitter:card", content: "summary_large_image" },
@@ -113,7 +116,10 @@ export default ({ data: { strapiAccueil, strapiCategories } }: Props) => (
           <Title style={{ color: StrapiToColors[strapiCategories.Couleur] }}>
             {strapiCategories.Titre}{" "}
             <CategoryImg
-              src={fromAPI(strapiCategories.Image.formats.thumbnail.url)}
+              src={fromAPI({
+                image: strapiCategories.Image,
+                format: "thumbnail",
+              })}
               alt={strapiCategories.Image.alternativeText}
             />
           </Title>
@@ -126,7 +132,10 @@ export default ({ data: { strapiAccueil, strapiCategories } }: Props) => (
                 key={subCat.id}
                 title={subCat.Titre}
                 color={StrapiToColors[strapiCategories.Couleur]}
-                imageURL={fromAPI(subCat.Image.formats.small.url)}
+                imageURL={fromAPI({
+                  image: subCat.Image,
+                  format: "small",
+                })}
                 description={subCat.Description}
               />
             </Link>
