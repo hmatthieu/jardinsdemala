@@ -62,7 +62,7 @@ interface Props {
       Slug: string;
       Entete: string;
       Description: string;
-      Image: {
+      Image?: {
         alternativeText: string;
         formats: {
           thumbnail: {
@@ -120,7 +120,7 @@ export default ({ data: { strapiAccueil, strapiCategories } }: Props) => (
                 image: strapiCategories.Image,
                 format: "thumbnail",
               })}
-              alt={strapiCategories.Image.alternativeText}
+              alt={strapiCategories.Image?.alternativeText}
             />
           </Title>
           <Description>{strapiCategories.Entete}</Description>

@@ -47,7 +47,7 @@ interface FooterData {
     Legal: {
       Liens: Lien[];
     };
-    Illustration: Image;
+    Illustration?: Image;
     Categories: Category[];
   };
   strapiIdentite: Identity;
@@ -226,8 +226,8 @@ export const Footer = () => {
                 format: "small",
               })
         }
-        src={fromAPI(data.strapiPiedDePage.Illustration.url)}
-        alt={data.strapiPiedDePage.Illustration.alternativeText}
+        src={fromAPI(data.strapiPiedDePage.Illustration?.url)}
+        alt={data.strapiPiedDePage.Illustration?.alternativeText}
         loading="lazy"
         onLoad={handleImageLoad}
       />

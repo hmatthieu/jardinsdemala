@@ -231,7 +231,7 @@ export default ({
                         image: article.Image,
                         format: "small",
                       })}
-                      alt={article.Image.alternativeText}
+                      alt={article.Image?.alternativeText}
                       loading="lazy"
                     />
                     <div>
