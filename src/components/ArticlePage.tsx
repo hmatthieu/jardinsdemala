@@ -55,6 +55,7 @@ interface ContentProps {
 export default ({
   data,
   pageContext: { article, favicon },
+  location,
 }: PageProps<
   { strapiCategories?: { Couleur: StrapiColor } },
   ContentProps
@@ -77,7 +78,7 @@ export default ({
           },
           {
             property: "og:url",
-            content: `https://jardinsdemala.fr/article${article.path}`,
+            content: location.href,
           },
           { property: "og:type", content: "website" },
           { property: "og:title", content: article.title },
@@ -104,7 +105,11 @@ export default ({
               <Tag color={color}>
                 {moment(article.date).format("DD.MM.YYYY")}
               </Tag>
-              <Share color={color}>
+              <Share
+                href={`https://www.facebook.com/sharer.php?u=${location.href}`}
+                target="_blank"
+                color={color}
+              >
                 <Facebook />
               </Share>
             </TagsContainer>

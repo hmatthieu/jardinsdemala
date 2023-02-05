@@ -1,6 +1,6 @@
 import * as React from "react";
 import Helmet from "react-helmet";
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import { fromAPI } from "../technical/fromAPI";
 import { Content, Page, Title } from "../components/Page";
 import { SafeMountMapComponent } from "../components/map";
@@ -54,15 +54,13 @@ interface Identity {
 }
 
 interface Props {
-  data: {
-    strapiAccueil: {
-      SEO: SEO;
-    };
-    strapiIdentite: Identity;
+  strapiAccueil: {
+    SEO: SEO;
   };
+  strapiIdentite: Identity;
 }
 
-const Landing = ({ data }: Props) => (
+const Landing = ({ data, location }: PageProps<Props>) => (
   <>
     <Helmet
       title="Nous trouver"
@@ -75,7 +73,7 @@ const Landing = ({ data }: Props) => (
           name: "viewport",
           content: "width=device-width, initial-scale=0.7",
         },
-        { property: "og:url", content: fromAPI("") },
+        { property: "og:url", content: location.href },
         { property: "og:type", content: "website" },
         { property: "og:title", content: "Nous trouver" },
         {

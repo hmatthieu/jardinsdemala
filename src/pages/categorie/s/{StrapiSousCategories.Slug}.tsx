@@ -164,7 +164,7 @@ const ArticleCTAMap: Record<Article["Type"], string> = {
 
 export default ({
   data: { strapiAccueil, strapiSousCategories },
-  location: { search },
+  location: { search, href },
 }: PageProps<Data>) => {
   const searchParams = new URLSearchParams(search);
   const pages: Article[][] = chunk(
@@ -194,7 +194,7 @@ export default ({
           },
           {
             property: "og:url",
-            content: `https://jardinsdemala.fr/categorie/s/${strapiSousCategories.Slug}`,
+            content: href,
           },
           { property: "og:type", content: "website" },
           { property: "og:title", content: strapiSousCategories.Titre },

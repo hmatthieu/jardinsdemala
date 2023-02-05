@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql, Link, PageProps } from "gatsby";
 import { StrapiColor, StrapiToColors } from "../../constant/Colors";
 import styled from "styled-components";
 import { Content, OffsetContentLeft, Page, Title } from "../../components/Page";
@@ -52,30 +52,31 @@ interface SubCategory {
 }
 
 interface Props {
-  data: {
-    strapiAccueil: {
-      SEO: SEO;
-    };
-    strapiCategories: {
-      Couleur: StrapiColor;
-      Titre: string;
-      Slug: string;
-      Entete: string;
-      Description: string;
-      Image?: {
-        alternativeText: string;
-        formats: {
-          thumbnail: {
-            url: string;
-          };
+  strapiAccueil: {
+    SEO: SEO;
+  };
+  strapiCategories: {
+    Couleur: StrapiColor;
+    Titre: string;
+    Slug: string;
+    Entete: string;
+    Description: string;
+    Image?: {
+      alternativeText: string;
+      formats: {
+        thumbnail: {
+          url: string;
         };
       };
-      sous_categories: SubCategory[];
     };
+    sous_categories: SubCategory[];
   };
 }
 
-export default ({ data: { strapiAccueil, strapiCategories } }: Props) => (
+export default ({
+  data: { strapiAccueil, strapiCategories },
+  location,
+}: PageProps<Props>) => (
   <>
     <Helmet
       title={strapiCategories.Titre}
@@ -91,7 +92,7 @@ export default ({ data: { strapiAccueil, strapiCategories } }: Props) => (
         },
         {
           property: "og:url",
-          content: `https://jardinsdemala.fr/categorie/${strapiCategories.Slug}`,
+          content: location.href,
         },
         { property: "og:type", content: "website" },
         { property: "og:title", content: strapiCategories.Titre },
