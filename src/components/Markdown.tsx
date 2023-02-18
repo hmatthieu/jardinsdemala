@@ -10,6 +10,19 @@ const BaseMarkdown = styled(ReactMarkdown)`
     white-space: pre-wrap;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: ${({ $accentColor }) => $accentColor};
+  }
+
+  h1 {
+    font-size: 46px;
+    font-weight: bold;
+  }
+
   h2 {
     font-size: 28px;
   }
@@ -33,11 +46,6 @@ const BaseMarkdown = styled(ReactMarkdown)`
   h4,
   h5 {
     margin-top: 12px;
-  }
-
-  p:not(:empty) {
-    display: flex;
-    flex-wrap: wrap;
   }
 
   h4 + p {
@@ -74,6 +82,11 @@ const BaseMarkdown = styled(ReactMarkdown)`
       padding: 12px 24px;
       font-style: italic;
     }
+  }
+
+  a {
+    color: ${({ $accentColor }) => $accentColor};
+    text-decoration: underline;
   }
 `;
 

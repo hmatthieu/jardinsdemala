@@ -20,6 +20,8 @@ export function handleCMSClick(e: SyntheticEvent<HTMLElement>) {
     if (processedHref.startsWith("/")) {
       e.preventDefault();
       return navigate(processedHref);
+    } else {
+      link.target = "_blank";
     }
   }
 }
