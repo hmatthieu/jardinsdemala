@@ -52,11 +52,6 @@ const BaseMarkdown = styled(ReactMarkdown)`
     margin-top: 0 !important;
   }
 
-  p:not(:empty) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
   ul {
     padding-inline-start: 20px;
     list-style: disc;
