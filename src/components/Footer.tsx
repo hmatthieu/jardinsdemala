@@ -243,7 +243,7 @@ export const Footer = () => {
             </nav>
             <OptionalNav>
               {data.strapiPiedDePage.Categories.map(({ id, Titre, Slug }) => (
-                <AnyLink key={id} href={`/${Slug}`}>
+                <AnyLink key={id} href={`/categorie/${Slug}`}>
                   {Titre}
                 </AnyLink>
               ))}
